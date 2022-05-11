@@ -1,8 +1,10 @@
+const dotenv = require("dotenv").config();
 const express = require("express");
 const { errorHandler } = require("./middlware/errorMiddlware");
+const connectDB = require("./config/db");
+const port = process.env.PORT || 5000;
 
-const CONNECTION_URL = process.env.CONNECTION_URL;
-const PORT = process.env.PORT || 5000;
+connectDB();
 
 const app = express();
 
@@ -13,4 +15,4 @@ app.use("/api/schedule", require("./routes/daySchedule"));
 
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+app.listen(port, () => console.log(`Server started on port: ${port}`));
