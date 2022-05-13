@@ -6,8 +6,9 @@ const {
   updateDay,
   deleteDay,
 } = require("../controllers/schedule");
+const { protect } = require("../middlware/authMiddlware");
 
-router.route("/").get(getSchedule).post(postSchedule);
-router.route("/:id").put(updateDay).delete(deleteDay);
+router.route("/").get(protect, getSchedule).post(protect, postSchedule);
+router.route("/:id").put(protect, updateDay).delete(protect, deleteDay);
 
 module.exports = router;
