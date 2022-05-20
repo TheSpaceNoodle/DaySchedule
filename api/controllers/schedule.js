@@ -18,7 +18,12 @@ const getSchedule = asyncHandler(async (req, res) => {
 const postSchedule = asyncHandler(async (req, res) => {
   if (!req.body.activityName) {
     res.status(400);
-    throw new Error("please add a text");
+    throw new Error("please add activity name");
+  }
+
+  if (!req.body.time) {
+    res.status(400);
+    throw new Error("please add time when activity starts");
   }
 
   const schedule = await Schedule.create({
@@ -43,14 +48,12 @@ const updateDay = asyncHandler(async (req, res) => {
     throw Error("day not found");
   }
 
-  const user = await User.findById(req.user.id);
-
-  if (!user) {
+  if (!req.user) {
     req.status(401);
     throw new Error("User not found");
   }
 
-  if (schedule.user.toString() !== user.id) {
+  if (schedule.user.toString() !== req.user.id) {
     req.status(401);
     throw new Error("User not authorized");
   }
@@ -75,14 +78,12 @@ const deleteDay = asyncHandler(async (req, res) => {
     throw Error("no such day");
   }
 
-  const user = await User.findById(req.user.id);
-
-  if (!user) {
+  if (!req.user) {
     req.status(401);
     throw new Error("User not found");
   }
 
-  if (schedule.user.toString() !== user.id) {
+  if (schedule.user.toString() !== req.user.id) {
     req.status(401);
     throw new Error("User not authorized");
   }
