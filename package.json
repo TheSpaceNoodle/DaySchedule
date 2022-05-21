@@ -1,0 +1,23 @@
+{
+  "name": "day-schedule",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/main.js",
+    "server": "nodemon backend/main.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SheogorathD/DaySchedule.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SheogorathD/DaySchedule/issues"
+  },
+  "homepage": "https://github.com/SheogorathD/DaySchedule#readme"
+}
