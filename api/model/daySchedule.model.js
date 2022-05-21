@@ -7,13 +7,13 @@ const dayScheduleSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    date: String,
-    time: String,
     activityName: {
       type: String,
       required: true,
     },
     description: String,
+    date: String,
+    time: String,
   },
   {
     timestamps: true,

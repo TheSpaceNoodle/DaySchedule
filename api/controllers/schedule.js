@@ -15,7 +15,7 @@ const getSchedule = asyncHandler(async (req, res) => {
 // @desc    Post Schedule
 // @route   /api/schedule
 // @access  Private
-const postSchedule = asyncHandler(async (req, res) => {
+const postActivity = asyncHandler(async (req, res) => {
   if (!req.body.activityName) {
     res.status(400);
     throw new Error("please add activity name");
@@ -28,7 +28,7 @@ const postSchedule = asyncHandler(async (req, res) => {
 
   const schedule = await Schedule.create({
     user: req.user.id,
-    date: req.body.createdAt,
+    date: req.body.date,
     time: req.body.time,
     activityName: req.body.activityName,
     description: req.body.description,
@@ -92,4 +92,4 @@ const deleteDay = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
-module.exports = { getSchedule, postSchedule, updateDay, deleteDay };
+module.exports = { getSchedule, postActivity, updateDay, deleteDay };

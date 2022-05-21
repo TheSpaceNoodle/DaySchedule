@@ -62,7 +62,7 @@ function Registration() {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="registration-form">
         <h2>Create Account</h2>
         <label>
           <input

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout, reset } from "../features/auth/authSlice";
 
-function Header() {
+function Header(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -32,12 +32,15 @@ function Header() {
         </div>
         <ul>
           {user ? (
-            <li>
-              <button onClick={onLogout}>
-                <FaSignOutAlt />
-                Sign Out
-              </button>
-            </li>
+            <>
+              {props.children}
+              <li>
+                <button onClick={onLogout}>
+                  <FaSignOutAlt />
+                  Sign Out
+                </button>
+              </li>
+            </>
           ) : (
             <>
               <li>

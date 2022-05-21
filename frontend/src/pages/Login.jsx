@@ -56,7 +56,7 @@ function Login() {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="login-form">
         <h2>Sign In</h2>
         <label>
           <input
