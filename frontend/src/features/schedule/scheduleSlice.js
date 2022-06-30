@@ -58,11 +58,11 @@ export const updateActivity = createAsyncThunk(
 );
 
 export const deleteActivity = createAsyncThunk(
-  "schedule/deleteActivity",
-  async (thunkAPI, key) => {
+  "schedule/deleteDay",
+  async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await scheduleService.deleteActivity(key, token);
+      return await scheduleService.deleteActivity(id, token);
     } catch (error) {
       const message =
         (error.responce && error.responce.data && error.respoce.data.message) ||

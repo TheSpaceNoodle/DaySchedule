@@ -11,7 +11,7 @@ function Dashboard() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  const { schedule, isError, isSuccess, isLoading, message } = useSelector(
+  const { schedule, isError, isLoading, message } = useSelector(
     (state) => state.schedule
   );
 
@@ -29,34 +29,30 @@ function Dashboard() {
     return () => {
       dispatch(reset());
     };
-  }, [user, navigate, dispatch]);
+  }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {
     return <Spinner />;
   }
 
+  const activityItems = schedule.map((activity) => (
+    <ActivityItem key={activity._id} activity={activity} />
+  ));
+
   return (
     <>
-      {user ? (
+      {
         <>
           <header>
-            <h2>Have a nice day, {user.name}!</h2>
+            <h2>Welcome {user && user.name}!</h2>
             <h2>
               You have {schedule.length ? schedule.length : "no"} activities
               left!
             </h2>
           </header>
-          <div className="activities">
-            {schedule.map((activity) => (
-              <ActivityItem
-                key={activity._id}
-                activity={activity}
-                date={activity.date}
-              />
-            ))}
-          </div>
+          <div className="activities">{activityItems}</div>
         </>
-      ) : null}
+      }
     </>
   );
 }

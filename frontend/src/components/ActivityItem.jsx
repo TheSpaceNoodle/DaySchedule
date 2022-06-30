@@ -3,7 +3,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { deleteActivity } from "../features/schedule/scheduleSlice";
 
-function ActivityItem({ activity, date }) {
+function ActivityItem({ activity }) {
   const dispatch = useDispatch();
 
   return (
@@ -11,11 +11,11 @@ function ActivityItem({ activity, date }) {
       <div className="activity-wrapper">
         <div className="activity-title">
           <h3>{activity.activityName}</h3>
-          {!activity.time && !date ? null : (
+          {!activity.time && !activity.date ? null : (
             <>
               <div>
                 {activity.time ? <span>{activity.time}</span> : null}
-                {date ? <span>{date}</span> : null}
+                {activity.date ? <span>{activity.date}</span> : null}
               </div>
             </>
           )}
@@ -28,7 +28,9 @@ function ActivityItem({ activity, date }) {
             Created {new Date(activity.createdAt).toLocaleString("en-GB")}
           </span>
           <div className="icons">
-            <FaTrashAlt onClick={dispatch(deleteActivity(activity._id))} />
+            <FaTrashAlt
+              onClick={() => dispatch(deleteActivity(activity._id))}
+            />
           </div>
         </div>
       </div>
